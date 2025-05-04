@@ -29,7 +29,7 @@ This project was developed to fulfill an interview technical requirement.
 | Creative UI                         | ✅     | Styled layout, clean card grid, proper spacing                        |
 | Skeleton Loading Animations         | ✅     | For both grid and card title                                          |
 | Error Handling                      | ✅     | Error message if API fails                                            |
-| Edge Case Handling                  | ✅     | “No result found” message, fallback values like “N/A”                |
+| Edge Case Handling                  | ✅     | “No result found” message|
 | Race Condition Handling             | ✅     | Cancels previous API if new query happens before completion           |
 | Accessibility (a11y)                | ✅     | `aria-label`, `tabIndex`, `role="button"` for cards                   |
 | Persistent Search State                 | ✅     | Search query & page preserved in URL, so users can go back or share the result detail                          |
