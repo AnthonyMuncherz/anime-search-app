@@ -1,0 +1,110 @@
+    <Container
+      sx={{
+        maxWidth: "1200px !important", // ensure fixed width
+        mx: "auto", // center horizontally
+        pt: "100px",
+      }}
+    >
+      
+      <Grid container spacing={4} alignItems="flex-start">
+        {/* Column 1: Image + Back button */}
+        <Grid size={{ xs: 12, md: 3 }}>
+          <Box display="flex" flexDirection="column" alignItems="center" >
+            <img
+              src={anime.images.jpg.image_url}
+              alt={anime.title}
+              style={{
+                width: "150px",
+                height: "225px",
+                objectFit: "cover",
+                borderRadius: "8px",
+              }}
+            />
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate(-1)}
+              sx={{ mt: 2 }}
+            >
+              ← Back
+            </Button>
+          </Box>
+        </Grid>
+
+        {/* Column 2: Description & stats */}
+        <Grid size={{ xs: 12, md: 9 }}>
+          <Typography variant="h5" gutterBottom>
+            {anime.title}
+          </Typography>
+
+          <Box
+            component="span"
+            sx={{
+              backgroundColor: "#1976d2",
+              color: "white",
+              px: 1,
+              py: 0.5,
+              borderRadius: "4px",
+              fontWeight: "bold",
+            }}
+          >
+            Synopsis
+          </Box>
+
+          <Typography
+            paragraph
+            sx={{
+              mt: 1,
+              maxHeight: "150px",
+              overflow: "auto",
+              whiteSpace: "pre-line",
+            }}
+          >
+            {anime.synopsis}
+          </Typography>
+
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid size={{ xs: 6, sm: 3 }}>
+              <Paper sx={{ p: 2, bgcolor: "#e3f2fd" }}>
+                <Typography variant="h6" align="center">
+                  {anime.score ?? "N/A"}
+                </Typography>
+                <Typography fontSize={12} align="center">
+                  {anime.scored_by?.toLocaleString()} USERS
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid size={{ xs: 6, sm: 3 }}>
+              <Paper sx={{ p: 2, bgcolor: "#fce4ec" }}>
+                <Typography variant="h6" align="center">
+                  #{anime.rank ?? "N/A"}
+                </Typography>
+                <Typography fontSize={12} align="center">
+                  RANKED
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid size={{ xs: 6, sm: 3 }}>
+              <Paper sx={{ p: 2, bgcolor: "#f8bbd0" }}>
+                <Typography variant="h6" align="center">
+                  #{anime.popularity ?? "N/A"}
+                </Typography>
+                <Typography fontSize={12} align="center">
+                  POPULARITY
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid size={{ xs: 6, sm: 3 }}>
+              <Paper sx={{ p: 2, bgcolor: "#c8e6c9" }}>
+                <Typography variant="h6" align="center">
+                  {anime.members?.toLocaleString()}
+                </Typography>
+                <Typography fontSize={12} align="center">
+                  MEMBERS
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Container>
