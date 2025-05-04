@@ -11,7 +11,7 @@ This project was developed to fulfill an interview technical requirement.
 
 | Requirement| Status | Implementation Notes|
 |-------------------------------------------------------------|--------|------------------------------------------------------------------------|
-| Use React 18                                                | ✅     | `"react": "^18.x"` in `package.json`                                  |
+| Use React 18                                                | ✅     | `"react": "^19.0.0"` in `package.json`                                  |
 | Use React Hooks (no class components)                       | ✅     | All components use `useState`, `useEffect`, etc.                      |
 | Use TypeScript                                              | ✅     | `.tsx` based project, with strong typings                             |
 | Use `react-router-dom`                                      | ✅     | Routing between Search and Detail pages                              |
