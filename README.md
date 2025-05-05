@@ -1,17 +1,20 @@
 # Anime Search App
 
-A fast and accessible anime search app built with **React 18**, **TypeScript**, and **MUI**. Powered by [Jikan API](https://jikan.moe). 
+A fast and accessible anime search app built with **React 18**, **TypeScript**, and **MUI**  & [Jikan API](https://jikan.moe). 
 
 This project was developed to fulfill an interview technical requirement.
 
+## Live Demo
+
+👉 [https://anime-search-app-liard.vercel.app](https://anime-search-app-liard.vercel.app)
 
 ---
 
-## ✅ Requirement vs Implementation
+## Requirement vs Implementation
 
 | Requirement| Status | Implementation Notes|
 |-------------------------------------------------------------|--------|------------------------------------------------------------------------|
-| Use latest version of React| ✅     | `"react": "^19.0.0"` in `package.json`                                  |
+| Use React 18                                                | ✅     | `"react": "^19.0.0"` in `package.json`                                  |
 | Use React Hooks (no class components)                       | ✅     | All components use `useState`, `useEffect`, etc.                      |
 | Use TypeScript                                              | ✅     | `.tsx` based project, with strong typings                             |
 | Use `react-router-dom`                                      | ✅     | Routing between Search and Detail pages                              |
