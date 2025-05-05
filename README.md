@@ -6,7 +6,7 @@ This project was developed to fulfill an interview technical requirement.
 
 ## Live Demo
 
-👉 [https://anime-search-app-liard.vercel.app](https://anime-search-app-liard.vercel.app)
+[https://anime-search-app-liard.vercel.app](https://anime-search-app-liard.vercel.app)
 
 ---
 
@@ -36,16 +36,4 @@ This project was developed to fulfill an interview technical requirement.
 | Race Condition Handling             | ✅     | Cancels previous API if new query happens before completion           |
 | Accessibility (a11y)                | ✅     | `aria-label`, `tabIndex`, `role="button"` for cards                   |
 | Persistent Search State                 | ✅     | Search query & page preserved in URL, so users can go back or share the result detail                          |
-
----
-
-## 🛠 Stack
-
-- React 18 + TypeScript
-- React Router v6
-- Axios
-- MUI (Material UI v5)
-- Jikan REST API
-
----
 
