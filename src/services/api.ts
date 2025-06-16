@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AnimeDetail } from "../types/AnimeDetail";
+import { AnimeDetail, StreamingLink } from "../types/AnimeDetail";
 import { SearchResponse } from "../types/SearchResponse";
 
 const BASE_URL = "https://api.jikan.moe/v4";
@@ -19,5 +19,12 @@ export const getAnimeDetails = async (
   id: string
 ): Promise<{ data: AnimeDetail }> => {
   const response = await axios.get(`${BASE_URL}/anime/${id}`);
+  return response.data;
+};
+
+export const getAnimeStreaming = async (
+  id: string
+): Promise<{ data: StreamingLink[] }> => {
+  const response = await axios.get(`${BASE_URL}/anime/${id}/streaming`);
   return response.data;
 };

@@ -1,6 +1,7 @@
 export interface AnimeDetail {
     mal_id: number;
     title: string;
+    url: string;
     images: {
       jpg: {
         image_url: string;
@@ -13,4 +14,9 @@ export interface AnimeDetail {
     popularity: number;
     members: number;
   }
+  
+export interface StreamingLink {
+  name: string;
+  url: string;
+}
   

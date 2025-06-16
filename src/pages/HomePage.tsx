@@ -9,10 +9,14 @@ import {
   Grid,
   TextField,
   Pagination,
+  Box,
+  Chip,
+  Rating,
 } from "@mui/material";
 import { Skeleton } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AnimeSearchItem } from "../types/AnimeSearchItem";
+import { Search as SearchIcon } from "@mui/icons-material";
 
 const HomePage = () => {
   const location = useLocation();
@@ -75,111 +79,270 @@ const HomePage = () => {
   }, [debouncedQuery, page]);
 
   return (
-    <Container maxWidth="lg" style={{ paddingTop: "100px" }}>
-      <TextField
-        fullWidth
-        label="Search Anime"
-        variant="outlined"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-
-      {error && (
-        <Typography
-          color="error"
-          align="center"
-          sx={{ mt: 2 }}
-          role="alert"
-          aria-live="assertive"
+    <Box
+      sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+        paddingTop: "120px",
+        paddingBottom: "40px"
+      }}
+    >
+      <Container maxWidth="lg">
+        {/* Enhanced Search Bar */}
+        <Box
+          sx={{
+            background: 'rgba(255, 255, 255, 0.9)',
+            borderRadius: '16px',
+            padding: '24px',
+            marginBottom: '32px',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+            backdropFilter: 'blur(10px)',
+          }}
         >
-          {error}
-        </Typography>
-      )}
-
-      {loading ? (
-        <Grid
-          container
-          spacing={2}
-          justifyContent="center"
-          style={{ marginTop: "2rem" }}
-        >
-          {Array.from({ length: 8 }).map((_, i) => (
-            <Grid key={i} style={{ width: 225 }}>
-              <Skeleton variant="rectangular" width={225} height={325} />
-              <Skeleton width="80%" style={{ marginTop: 6 }} />
-            </Grid>
-          ))}
-        </Grid>
-      ) : (
-        <>
-          {animeList.length === 0 && debouncedQuery && (
+          <TextField
+            fullWidth
+            label="Search for your favorite anime..."
+            variant="outlined"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            InputProps={{
+              startAdornment: <SearchIcon sx={{ mr: 1, color: 'action.active' }} />,
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '12px',
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 1)',
+                },
+                '&.Mui-focused': {
+                  backgroundColor: 'rgba(255, 255, 255, 1)',
+                },
+              },
+            }}
+          />
+          {debouncedQuery && (
             <Typography
-              align="center"
-              style={{ marginTop: "2rem" }}
-              role="status"
+              variant="body2"
+              sx={{ mt: 1, color: 'text.secondary', textAlign: 'center' }}
             >
-              No results found.
+              Searching for "{debouncedQuery}"...
             </Typography>
           )}
+        </Box>
 
+        {error && (
+          <Box
+            sx={{
+              background: 'rgba(244, 67, 54, 0.1)',
+              border: '1px solid rgba(244, 67, 54, 0.3)',
+              borderRadius: '12px',
+              padding: '16px',
+              marginBottom: '24px',
+            }}
+          >
+            <Typography
+              color="error"
+              align="center"
+              role="alert"
+              aria-live="assertive"
+            >
+              {error}
+            </Typography>
+          </Box>
+        )}
+
+        {loading ? (
           <Grid
             container
-            spacing={2}
+            spacing={3}
             justifyContent="center"
-            style={{ marginTop: "2rem" }}
-            role="list"
-            aria-label="Search results"
           >
-            {animeList.map((anime) => (
-              <Grid style={{ width: 225 }}>
-                <Card
-                  onClick={() => navigate(`/anime/${anime.mal_id}`)}
-                  sx={{ cursor: "pointer", height: "100%" }}
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") navigate(`/anime/${anime.mal_id}`);
+            {Array.from({ length: 8 }).map((_, i) => (
+              <Grid key={i} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                <Box
+                  sx={{
+                    background: 'rgba(255, 255, 255, 0.9)',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
                   }}
-                  role="button"
-                  aria-label={`Open details for ${anime.title}`}
                 >
-                  <CardMedia
-                    component="img"
-                    height="325"
-                    image={anime.images.jpg.image_url}
-                    alt={anime.title}
-                    style={{ objectFit: "cover" }}
-                  />
-                  <CardContent>
-                    <Typography variant="body2" noWrap>
-                      {anime.title}
-                    </Typography>
-                  </CardContent>
-                </Card>
+                  <Skeleton variant="rectangular" width="100%" height={300} />
+                  <Box sx={{ p: 2 }}>
+                    <Skeleton width="80%" height={24} />
+                    <Skeleton width="60%" height={20} sx={{ mt: 1 }} />
+                  </Box>
+                </Box>
               </Grid>
             ))}
           </Grid>
+        ) : (
+          <>
+            {animeList.length === 0 && debouncedQuery && (
+              <Box
+                sx={{
+                  textAlign: 'center',
+                  padding: '48px',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  borderRadius: '16px',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  color="text.secondary"
+                  role="status"
+                >
+                  No results found for "{debouncedQuery}"
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                  Try searching with different keywords
+                </Typography>
+              </Box>
+            )}
 
-          {pageCount > 1 && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "2rem",
-              }}
-              aria-label="Pagination Navigation"
+            <Grid
+              container
+              spacing={3}
+              justifyContent="center"
+              role="list"
+              aria-label="Search results"
             >
-              <Pagination
-                count={pageCount}
-                page={page}
-                onChange={(_, value) => setPage(value)}
-                color="primary"
-                aria-current="true"
-              />
-            </div>
-          )}
-        </>
-      )}
-    </Container>
+              {animeList.map((anime) => (
+                <Grid key={anime.mal_id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+                  <Card
+                    onClick={() => navigate(`/anime/${anime.mal_id}`)}
+                    sx={{
+                      cursor: "pointer",
+                      height: "100%",
+                      borderRadius: '16px',
+                      background: 'rgba(255, 255, 255, 0.95)',
+                      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      '&:hover': {
+                        transform: 'translateY(-8px)',
+                        boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+                        background: 'rgba(255, 255, 255, 1)',
+                      },
+                      overflow: 'hidden',
+                    }}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") navigate(`/anime/${anime.mal_id}`);
+                    }}
+                    role="button"
+                    aria-label={`Open details for ${anime.title}`}
+                  >
+                    <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+                      <CardMedia
+                        component="img"
+                        height="300"
+                        image={anime.images.jpg.image_url}
+                        alt={anime.title}
+                        sx={{
+                          objectFit: "cover",
+                          transition: 'transform 0.3s ease-in-out',
+                          '&:hover': {
+                            transform: 'scale(1.05)',
+                          },
+                        }}
+                      />
+                      {anime.score && (
+                        <Chip
+                          label={`★ ${anime.score}`}
+                          size="small"
+                          sx={{
+                            position: 'absolute',
+                            top: 8,
+                            right: 8,
+                            background: 'rgba(25, 118, 210, 0.9)',
+                            color: 'white',
+                            fontWeight: 'bold',
+                          }}
+                        />
+                      )}
+                    </Box>
+                    <CardContent sx={{ p: 2 }}>
+                      <Typography 
+                        variant="h6" 
+                        noWrap
+                        sx={{
+                          fontWeight: 600,
+                          fontSize: '0.95rem',
+                          lineHeight: 1.3,
+                          marginBottom: 1,
+                        }}
+                      >
+                        {anime.title}
+                      </Typography>
+                      {anime.year && (
+                        <Typography variant="body2" color="text.secondary">
+                          {anime.year} • {anime.type || 'TV'}
+                        </Typography>
+                      )}
+                      {anime.score && (
+                        <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
+                          <Rating
+                            value={anime.score / 2}
+                            readOnly
+                            size="small"
+                            precision={0.1}
+                          />
+                          <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
+                            ({anime.score})
+                          </Typography>
+                        </Box>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+
+            {pageCount > 1 && (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "48px",
+                  padding: '24px',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  borderRadius: '16px',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                }}
+                aria-label="Pagination Navigation"
+              >
+                <Pagination
+                  count={pageCount}
+                  page={page}
+                  onChange={(_, value) => setPage(value)}
+                  color="primary"
+                  size="large"
+                  aria-current="true"
+                  sx={{
+                    '& .MuiPaginationItem-root': {
+                      borderRadius: '12px',
+                      margin: '0 4px',
+                      '&:hover': {
+                        background: 'rgba(25, 118, 210, 0.1)',
+                      },
+                    },
+                    '& .Mui-selected': {
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      color: 'white',
+                      '&:hover': {
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      },
+                    },
+                  }}
+                />
+              </Box>
+            )}
+          </>
+        )}
+      </Container>
+    </Box>
   );
 };
 

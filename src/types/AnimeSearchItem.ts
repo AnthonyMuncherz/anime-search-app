@@ -7,4 +7,6 @@ export interface AnimeSearchItem {
     };
   };
   score: number;
+  year?: number;
+  type?: string;
 }
